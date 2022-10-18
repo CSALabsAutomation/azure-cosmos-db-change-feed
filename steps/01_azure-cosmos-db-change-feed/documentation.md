@@ -10,6 +10,27 @@ In this lab you will use the Change Feed Processor Library and Azure Functions t
 - [ Introduction to Event Hubs ](https://learn.microsoft.com/en-gb/training/modules/intro-to-event-hubs/1-introduction)
 - [Get started with Azure Stream Analytics](https://learn.microsoft.com/en-gb/training/modules/examine-azure-stream-analytics-azure-functions/2-what-azure-stream-analytics)
 
+## Design of the lab solution
+
+   ![Change feed lab solution design diagram is displayed](./assets/01-change-feed-lab-solution-design.jpg "Understand Change feed lab solution design")
+
+   Following are the overview of steps perfomed in this lab:
+
+   1. Data Generator App: You create a console app which uses a randomized data generator to simulate data that represents events such as a user viewing an item, adding an item to their cart, and purchasing an item in an Ecommerce website. 
+   
+   1. Cosmos DB: Cosmos DB will take in the generated data and store it in a collection.
+
+   1. Change Feed: The change feed will listen for changes to the Cosmos DB collection. Every time a new document is added into the collection (i.e. an event occurs such a user viewing an item, adding an item to their cart, or purchasing an item), the change feed will send events to consumer applications.
+
+   1. Change Feed Processor App: You will create a console app to process the change feed and display the aggregate statitics. 
+
+   1. Azure Function: Once you understand how change feed works using the above console application, you will write an Azure Function will process the change feed data and send it into an Azure Event Hub.
+
+   1. Event Hub: The Azure Event Hub will store these events and send them to Azure Stream Analytics.
+
+   1. Azure Stream Analytics(optional): You will write queries by which Azure Stream Analytics will process events and build a real-time data analysis. It will send that analysis to Microsoft Power BI.
+
+   1. Power BI(optional): You will use Microsoft Power BI to visualize the data analysis from Azure Stream Analytics and build a dashboard so that you can see your metrics change in real time. Sample metrics that you can visualize include revenue, unique site visitors, most popular items, and average price of those items that are viewed versus added to a cart versus purchased. These sample metrics can help an e-commerce company evaluate its site popularity, develop its advertising and pricing strategies, and make decisions regarding what inventory to invest in.
 
 ## Build A .NET Console App to Generate Data
 
