@@ -55,7 +55,7 @@ In order to simulate data flowing into our store, in the form of actions on an e
    Select the OK button.
 
    Wait for the creation of the new database and container to finish before moving on with this lab.
-1. In the `Lab08` folder, right-click the folder and select the **Open with Code** menu option.
+1. In the Visual Studio Code , click on **File -> Open Folder** and select **Lab08** folder.
 
    > Alternatively, you can run a terminal in your current directory and execute the `code .` command.
 
@@ -127,6 +127,7 @@ namespace DataGenerator
            await Task.WhenAll(tasks);
       }
     }
+  }
 ```
 
 1. For the `_endpointUrl` variable, replace the placeholder value with the **URI** value and for the `_primaryKey` variable, replace the placeholder value with the **PRIMARY KEY** value from your Azure Cosmos DB account. Use [these instructions](https://github.com/CSALabsAutomation/azure-cosmosdb-lab/blob/main/steps/01_creating-a-partitioned-container/documentation.md) to get these values if you do not already have them:
@@ -147,7 +148,7 @@ namespace DataGenerator
 
 The key functionality of the console application is to add documents to our Cosmos DB to simulate activity on our e-commerce website. Here, you'll create a data definition for these documents and define a function to add them
 
-1.In the Visual Studio Code window, look in the Explorer pane and verify that you have a DataModel.cs file in your Shared  project folder. This file contains the CartAction class, ActionType enum you will be working with in the following steps. If it is not in your Shared project folder, you can copy it from this path in the cloned repo here 'C:\Labs\setup\templates\Lab08\DataModel.cs'
+1.In the Visual Studio Code window, look in the Explorer pane and verify that you have a DataModel.cs file in your Shared  project folder. This file contains the CartAction class, ActionType enum you will be working with in the following steps. If it is not in your Shared project folder, you can copy it from this path in the cloned repo here 'C:\Labs\setup\templates\Lab08\Shared\DataModel.cs'
 
 2. Within the `program.cs` file in the **DataGenerator** folder, below main() method add the `AddItem()` method. The purpose of this method is to add an instance of **CartAction** to our CosmosDB Container.
 
@@ -448,7 +449,7 @@ The first use case we'll explore for Cosmos DB Change Feed is Live Migration. A 
        dotnet build
       ```
 
-5. Create Container Id field, enter the value **CartContainerByState** under **StoreDatabase**
+5. Navigate to your Cosmos DB account and create Container by entering the value **CartContainerByState** under **StoreDatabase**
      
       In the Partition key field, enter the value **/BuyerState**
      
@@ -456,7 +457,7 @@ The first use case we'll explore for Cosmos DB Change Feed is Live Migration. A 
      
       Wait for the creation of the new container under **StoreDatabase** to finish before moving with further steps.
 
-6. Notice the container configuration value at the top of the `program.cs` file, for the name of the destination container, following `_containerId`:
+6. Within the Program class, add the following lines of code to create variables for Cosmos DB Connection, Cosmos Client and main() method as given below.
 
    
  ```csharp
@@ -720,13 +721,12 @@ In this exercise, we will implement .NET SDK's change feed processor library to 
    ```sh
 
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.0.9" />
-    <PackageReference Include="Microsoft.Azure.EventHubs" Version="4.3.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.CosmosDB" Version="3.0.10" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
     ```
    Under ChangeFeedFunctions.csproj file ,You need to update host.json and local.settings.json itemgroup and it should like this :
     ```sh
-       <None Update="host.json">
+    <None Update="host.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="local.settings.json">
@@ -1354,7 +1354,7 @@ With all of the configuration out of the way, you'll see how simple it is to wri
    //todo: Next steps here
    ```
 
-1. For each document that changed we want to write the data out to the Event Hub. Fortunately, we configured our Event Hub to expect JSON data so there's very little processing to do here. Add the following code snippet.
+1. For each document that changed we want to write the data out to the Event Hub. Fortunately, we configured our Event Hub to expect JSON data so there's very little processing to do here. Replace //todo: Next steps here by adding the following code snippet.
 
    ```csharp
    var tasks = new List<Task>();
