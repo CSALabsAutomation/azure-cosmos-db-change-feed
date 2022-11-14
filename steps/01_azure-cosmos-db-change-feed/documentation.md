@@ -958,7 +958,6 @@ The Azure Function receives a list of Documents that have changed. We want to or
    await Task.WhenAll(tasks);
    ```
 
-   > Take note of the _maxItemCount_ on the **CreateItemQuery** call. We're only expecting a single result at most because each state has at most one document.
 
 1. In the case that the stateCount object is _null_ we'll create a new one. Replace the `//todo: Add new doc code here` section with the following code:
 
