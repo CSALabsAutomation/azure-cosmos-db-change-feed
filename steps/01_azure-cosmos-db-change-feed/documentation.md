@@ -936,7 +936,7 @@ The Azure Function receives a list of Documents that have changed. We want to or
    {
       var query = new QueryDefinition("select * from StateSales s where s.State = @state").WithParameter("@state", key);
 
-      var resultSet = container.GetItemQueryIterator<StateCount>(query, requestOptions: new QueryRequestOptions() { PartitionKey = new Microsoft.Azure.Cosmos.PartitionKey(key), MaxItemCount = 1 });
+      var resultSet = container.GetItemQueryIterator<StateCount>(query);
 
       while (resultSet.HasMoreResults)
       {
@@ -958,7 +958,6 @@ The Azure Function receives a list of Documents that have changed. We want to or
    await Task.WhenAll(tasks);
    ```
 
-   > Take note of the _maxItemCount_ on the **CreateItemQuery** call. We're only expecting a single result at most because each state has at most one document.
 
 1. In the case that the stateCount object is _null_ we'll create a new one. Replace the `//todo: Add new doc code here` section with the following code:
 
@@ -1049,7 +1048,7 @@ The Azure Function receives a list of Documents that have changed. We want to or
                {
                   var query = new QueryDefinition("select * from StateSales s where s.State = @state").WithParameter("@state", key);
 
-                  var resultSet = container.GetItemQueryIterator<StateCount>(query, requestOptions: new QueryRequestOptions() { PartitionKey = new Microsoft.Azure.Cosmos.PartitionKey(key), MaxItemCount = 1 });
+                  var resultSet = container.GetItemQueryIterator<StateCount>(query);
 
                   while (resultSet.HasMoreResults)
                   {
