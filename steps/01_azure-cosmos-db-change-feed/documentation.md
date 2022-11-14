@@ -936,7 +936,7 @@ The Azure Function receives a list of Documents that have changed. We want to or
    {
       var query = new QueryDefinition("select * from StateSales s where s.State = @state").WithParameter("@state", key);
 
-      var resultSet = container.GetItemQueryIterator<StateCount>(query, requestOptions: new QueryRequestOptions() { PartitionKey = new Microsoft.Azure.Cosmos.PartitionKey(key), MaxItemCount = 1 });
+      var resultSet = container.GetItemQueryIterator<StateCount>(query);
 
       while (resultSet.HasMoreResults)
       {
@@ -1049,7 +1049,7 @@ The Azure Function receives a list of Documents that have changed. We want to or
                {
                   var query = new QueryDefinition("select * from StateSales s where s.State = @state").WithParameter("@state", key);
 
-                  var resultSet = container.GetItemQueryIterator<StateCount>(query, requestOptions: new QueryRequestOptions() { PartitionKey = new Microsoft.Azure.Cosmos.PartitionKey(key), MaxItemCount = 1 });
+                  var resultSet = container.GetItemQueryIterator<StateCount>(query);
 
                   while (resultSet.HasMoreResults)
                   {
